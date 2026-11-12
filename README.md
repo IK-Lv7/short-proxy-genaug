@@ -132,6 +132,10 @@ Runs whose results already exist are skipped (`--force` overwrites, `--only <con
 Experiments were run on a single 16 GB GPU, one job at a time.
 Tiny-ImageNet is subject to the ImageNet terms of access; images derived from it are not distributed.
 
+## Archive and citation
+
+The code and results of release v1.0.0 are archived on Zenodo: [10.5281/zenodo.24156494](https://doi.org/10.5281/zenodo.24156494).
+
 ## License
 
 MIT (see `LICENSE`).
