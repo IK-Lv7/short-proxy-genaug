@@ -67,7 +67,6 @@ def main():
                 if v is not None and bv is not None:
                     row[f"P{B}"] = (v - bv) * 100
                     row[f"G{B}"] = G
-            # P in preregistration 2 is the proxy result (no fit statistics). Values are nearly the same as proxyfit, so the paper uses proxyfit
             rows.append(row)
     df = pd.DataFrame(rows)
     for m in [met, dsm]:

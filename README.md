@@ -1,6 +1,7 @@
 # short-proxy-genaug
 
 Code, configurations and per-seed results for the paper "Can a Short Training Run Choose a Generative Data Augmentation?".
+Preprint: https://doi.org/10.5281/zenodo.24156590 (Zenodo; this DOI always points to the latest version).
 
 This repository contains only what is needed to check and reproduce the experiments and analyses in the paper.
 Datasets, generated images and model weights are not included (see "Reproducing").
