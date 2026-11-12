@@ -1,0 +1,12 @@
+# Sanity check for extra check 5 (point 7): does G overrate "too easy" images? (CIFAR-100 subset 0, ResNet-18, total 16000 iterations)
+# Images are built from existing generated images by scripts/make_shortcut_sets.py. Δ is relative to fixedsteps_gen/baseline
+name: shortcut_gen
+reference: fixedsteps_gen/baseline
+seeds: [0, 1, 2, 3, 4]
+overrides:
+  train: {steps: 16000}
+conditions:
+  img2img_s1.0_patch_r1.0:     {aug: {generated: {name: img2img_s1.0_patch, ratio: 1.0}}}
+  roundtrip_patch_r1.0:        {aug: {generated: {name: resize_roundtrip_patch, ratio: 1.0}}}
+  img2img_s1.0_dup1_r1.0:      {aug: {generated: {name: img2img_s1.0_dup1, ratio: 1.0}}}
+  img2img_s1.0_dup5_r1.0:      {aug: {generated: {name: img2img_s1.0_dup5, ratio: 1.0}}}

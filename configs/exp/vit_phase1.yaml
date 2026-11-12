@@ -1,0 +1,11 @@
+# Scale-up: fine-tune CIFAR-100 (50/class) with ImageNet-pretrained ViT-B/16 (32px upscaled to 224px).
+# First risk check: baseline seed variance and deciding the number of training steps
+name: vit_phase1
+reference: baseline
+seeds: [0, 1, 2]
+overrides:
+  data: {resize: 224}
+  model: {name: vitb16_pretrained}
+  train: {steps: 4000, record_every: 200, batch_size: 32, lr: 0.01, weight_decay: 1.0e-4}
+conditions:
+  baseline: {}

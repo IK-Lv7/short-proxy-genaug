@@ -1,0 +1,25 @@
+# Shared settings for all experiments. Overridden by values in experiment files (configs/exp/*.yaml)
+data:
+  root: data/cifar100          # data/cifar100 is a symlink to the original data location
+  n_per_class: 50              # images used for training / class
+  n_val_per_class: 50          # validation images / class for hyperparameter tuning (test is for final evaluation only)
+  subset_seed: 0               # seed for subset selection (independent of training seed)
+model:
+  name: resnet18_cifar
+train:
+  epochs: 200                  # used when steps is null
+  steps: null                  # set to fix total iterations
+  record_every: 200            # history logging interval when steps is set
+  batch_size: 128
+  lr: 0.1
+  momentum: 0.9
+  weight_decay: 5.0e-4
+  num_workers: 8
+  amp: true
+  deterministic: false         # true makes cudnn deterministic (slower)
+aug:
+  crop_flip: true              # standard RandomCrop(32, pad=4) + HorizontalFlip
+  randaugment: null            # e.g. {num_ops: 2, magnitude: 9}
+  trivialaugment: false
+  autoaugment: false           # CIFAR10 policy
+  generated: null              # generative augmentation (added in phase 2)

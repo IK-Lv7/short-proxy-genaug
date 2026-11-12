@@ -1,0 +1,13 @@
+# Flowers102 (10/class) + fine-tune ImageNet-pretrained ResNet-50 (224px).
+# First risk check: baseline seed variance and deciding the number of training steps
+name: flowers_phase1
+reference: baseline
+seeds: [0, 1, 2, 3, 4]
+overrides:
+  data: {name: flowers102, root: data/flowers102, n_per_class: 10, n_val_per_class: 10}
+  model: {name: resnet50_pretrained}
+  train: {steps: 2000, record_every: 100, batch_size: 32, lr: 0.01, weight_decay: 1.0e-4}
+conditions:
+  baseline: {}
+  noaug:
+    aug: {crop_flip: false}

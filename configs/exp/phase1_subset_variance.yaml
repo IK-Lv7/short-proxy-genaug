@@ -1,0 +1,9 @@
+# Phase 1: variance from subset choice (subset_seed). See phase1_seed_variance for subset 0
+name: phase1_subset_variance
+reference: baseline_sub1
+seeds: [0, 1, 2]
+conditions:
+  baseline_sub1: {data: {subset_seed: 1}}
+  baseline_sub2: {data: {subset_seed: 2}}
+  baseline_sub3: {data: {subset_seed: 3}}
+  baseline_sub4: {data: {subset_seed: 4}}

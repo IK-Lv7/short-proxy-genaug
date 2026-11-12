@@ -1,0 +1,15 @@
+# Generalization check: 7 main conditions with subset_seed=1. Metrics and decision rules are those fixed on subset 0
+name: sub1_gen
+reference: baseline
+seeds: [0, 1, 2, 3, 4]
+overrides:
+  data: {subset_seed: 1}
+  train: {steps: 16000}
+conditions:
+  baseline: {}
+  roundtrip_r1.0:           {aug: {generated: {name: resize_roundtrip_sub1, ratio: 1.0}}}
+  img2img_s0.5_r1.0:        {aug: {generated: {name: img2img_s0.5_sub1, ratio: 1.0}}}
+  img2img_s1.0_r1.0:        {aug: {generated: {name: img2img_s1.0_sub1, ratio: 1.0}}}
+  s1.0_noise0.5:            {aug: {generated: {name: img2img_s1.0_sub1, ratio: 1.0, label_noise: {name: img2img_s1.0_wrong_sub1, rate: 0.5}}}}
+  inpaint_center_m0.75_r1.0: {aug: {generated: {name: inpaint_center_m0.75_sub1, ratio: 1.0}}}
+  img2img_s1.0_sketch_r1.0: {aug: {generated: {name: img2img_s1.0_sketch_sub1, ratio: 1.0}}}

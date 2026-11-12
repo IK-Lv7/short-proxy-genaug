@@ -1,0 +1,11 @@
+# Second and third generation methods (inpainting).
+name: inpaint_gen
+reference: fixedsteps_gen/baseline
+seeds: [0, 1, 2, 3, 4]
+overrides:
+  train: {steps: 16000}
+conditions:
+  inpaint_center_m0.5_r1.0:  {aug: {generated: {name: inpaint_center_m0.5, ratio: 1.0}}}
+  inpaint_center_m0.75_r1.0: {aug: {generated: {name: inpaint_center_m0.75, ratio: 1.0}}}
+  inpaint_border_k0.75_r1.0: {aug: {generated: {name: inpaint_border_k0.75, ratio: 1.0}}}
+  inpaint_border_k0.5_r1.0:  {aug: {generated: {name: inpaint_border_k0.5, ratio: 1.0}}}

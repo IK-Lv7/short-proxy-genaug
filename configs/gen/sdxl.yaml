@@ -1,0 +1,22 @@
+# Second generation model: SDXL base 1.0 (img2img). CIFAR-100 subset 0. Prompt and strength settings match the SD 1.5 version
+# Resolution is 768px to save compute (SDXL default is 1024px)
+common:
+  source: {n_per_class: 50, n_val_per_class: 50, subset_seed: 0}
+  out_root: data/generated
+  n_per_image: 1
+  seed: 0
+  resolution: 768
+  method: sdxl_img2img
+  model: stabilityai/stable-diffusion-xl-base-1.0
+  cache_dir: data/hf_cache
+  variant: fp16
+  prompt: "a photo of a {cls}"
+  negative_prompt: "blurry, low quality, text, watermark"
+  guidance_scale: 7.5
+  num_inference_steps: 30
+  batch_size: 4
+variants:
+  sdxl_s0.5: {strength: 0.5}
+  sdxl_s1.0: {strength: 1.0}
+  sdxl_s1.0_wrong: {strength: 1.0, wrong_prompt: true}
+  sdxl_s1.0_g1.0: {strength: 1.0, guidance_scale: 1.0}

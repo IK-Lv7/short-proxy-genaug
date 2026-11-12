@@ -1,0 +1,72 @@
+# Reproduce 10 main conditions with another model (VGG-11, no residual connections). Data, generated images, and training settings same as ResNet-18
+name: vgg_gen
+reference: baseline
+seeds:
+- 0
+- 1
+- 2
+- 3
+- 4
+overrides:
+  model:
+    name: vgg11_cifar
+  train:
+    steps: 16000
+conditions:
+  baseline: {}
+  roundtrip_r1.0:
+    aug:
+      generated:
+        name: resize_roundtrip
+        ratio: 1.0
+  img2img_s0.5_r1.0:
+    aug:
+      generated:
+        name: img2img_s0.5
+        ratio: 1.0
+  img2img_s1.0_r1.0:
+    aug:
+      generated:
+        name: img2img_s1.0
+        ratio: 1.0
+  s1.0_noise0.25:
+    aug:
+      generated:
+        name: img2img_s1.0
+        ratio: 1.0
+        label_noise:
+          name: img2img_s1.0_wrong
+          rate: 0.25
+  s1.0_noise0.5:
+    aug:
+      generated:
+        name: img2img_s1.0
+        ratio: 1.0
+        label_noise:
+          name: img2img_s1.0_wrong
+          rate: 0.5
+  inpaint_center_m0.75_r1.0:
+    aug:
+      generated:
+        name: inpaint_center_m0.75
+        ratio: 1.0
+  inpaint_border_k0.75_r1.0:
+    aug:
+      generated:
+        name: inpaint_border_k0.75
+        ratio: 1.0
+  img2img_s1.0_sketch_r1.0:
+    aug:
+      generated:
+        name: img2img_s1.0_sketch
+        ratio: 1.0
+  img2img_s1.0_g1.0_r1.0:
+    aug:
+      generated:
+        name: img2img_s1.0_g1.0
+        ratio: 1.0
+  img2img_s1.0_r0.25:
+    aug:
+      generated:
+        name: img2img_s1.0
+        ratio: 0.25

@@ -1,0 +1,20 @@
+# Replacement images for the removal/replacement experiment (configs/exp/filter_gen.yaml): same source images and settings, only the generation seed differs
+common:
+  source: {n_per_class: 50, n_val_per_class: 50, subset_seed: 0}
+  out_root: data/generated
+  n_per_image: 1
+  seed: 1
+  resolution: 512
+  cache_dir: data/hf_cache
+  negative_prompt: "blurry, low quality, text, watermark"
+  num_inference_steps: 30
+  batch_size: 8
+  method: img2img
+  model: stable-diffusion-v1-5/stable-diffusion-v1-5
+  prompt: "a photo of a {cls}"
+  strength: 1.0
+variants:
+  img2img_s1.0_seed1:
+    guidance_scale: 7.5
+  img2img_s1.0_g1.0_seed1:
+    guidance_scale: 1.0

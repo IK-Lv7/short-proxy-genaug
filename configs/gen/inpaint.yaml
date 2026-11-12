@@ -1,0 +1,24 @@
+# Second and third generation methods: SD 1.5 inpainting
+#   inpaint_center: repaint a centered square (side mask_frac) (repaint the object)
+#   inpaint_border: keep a centered square (side mask_frac) and repaint the surroundings (approximates background replacement)
+common:
+  source: {n_per_class: 50, n_val_per_class: 50, subset_seed: 0}
+  out_root: data/generated
+  n_per_image: 1
+  seed: 0
+  resolution: 512
+  method: inpaint
+  model: stable-diffusion-v1-5/stable-diffusion-inpainting
+  cache_dir: data/hf_cache
+  variant: fp16                # only the fp16 variant of this repo has safetensors
+  prompt: "a photo of a {cls}"
+  negative_prompt: "blurry, low quality, text, watermark"
+  guidance_scale: 7.5
+  num_inference_steps: 30
+  strength: 1.0
+  batch_size: 8
+variants:
+  inpaint_center_m0.5:  {mask_mode: center, mask_frac: 0.5}
+  inpaint_center_m0.75: {mask_mode: center, mask_frac: 0.75}
+  inpaint_border_k0.75: {mask_mode: border, mask_frac: 0.75}
+  inpaint_border_k0.5:  {mask_mode: border, mask_frac: 0.5}

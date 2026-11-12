@@ -1,0 +1,21 @@
+# Extra check 5 (point 6): train the same conditions as flowers_gen on top of TrivialAugment (TrivialAugment is also applied to generated images).
+# Δ is relative to this experiment's baseline (TrivialAugment only)
+name: flowers_ta_gen
+reference: baseline
+seeds: [0, 1, 2, 3, 4]
+overrides:
+  data: {name: flowers102, root: data/flowers102, n_per_class: 10, n_val_per_class: 10}
+  model: {name: resnet50_pretrained}
+  train: {steps: 4000, record_every: 100, batch_size: 32, lr: 0.01, weight_decay: 1.0e-4}
+  aug: {trivialaugment: true}
+conditions:
+  baseline: {}
+  roundtrip_r1.0: {aug: {generated: {name: resize_roundtrip_fl, ratio: 1.0}}}
+  img2img_s0.5_r1.0: {aug: {generated: {name: img2img_s0.5_fl, ratio: 1.0}}}
+  img2img_s1.0_r1.0: {aug: {generated: {name: img2img_s1.0_fl, ratio: 1.0}}}
+  s1.0_noise0.25: {aug: {generated: {name: img2img_s1.0_fl, ratio: 1.0, label_noise: {name: img2img_s1.0_wrong_fl, rate: 0.25}}}}
+  s1.0_noise0.5: {aug: {generated: {name: img2img_s1.0_fl, ratio: 1.0, label_noise: {name: img2img_s1.0_wrong_fl, rate: 0.5}}}}
+  img2img_s1.0_g1.0_r1.0: {aug: {generated: {name: img2img_s1.0_g1.0_fl, ratio: 1.0}}}
+  img2img_s1.0_sketch_r1.0: {aug: {generated: {name: img2img_s1.0_sketch_fl, ratio: 1.0}}}
+  inpaint_center_m0.75_r1.0: {aug: {generated: {name: inpaint_center_m0.75_fl, ratio: 1.0}}}
+  img2img_s1.0_r0.5: {aug: {generated: {name: img2img_s1.0_fl, ratio: 0.5}}}

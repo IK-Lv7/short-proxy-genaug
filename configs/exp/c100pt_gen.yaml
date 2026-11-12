@@ -1,0 +1,127 @@
+# Review Major 5: fine-tune CIFAR-100 subset 0 with an ImageNet-pretrained ResNet-50 (32px -> 224px).
+# Generated images are the existing CIFAR-100 ones. Total 4000 iterations (decided in c100pt_phase1)
+name: c100pt_gen
+reference: baseline
+seeds:
+- 0
+- 1
+- 2
+- 3
+- 4
+overrides:
+  data:
+    resize: 224
+  model:
+    name: resnet50_pretrained
+  train:
+    steps: 4000
+    record_every: 200
+    batch_size: 32
+    lr: 0.01
+    weight_decay: 0.0001
+conditions:
+  baseline: {}
+  roundtrip_r1.0:
+    aug:
+      generated:
+        name: resize_roundtrip
+        ratio: 1.0
+  img2img_s0.3_r1.0:
+    aug:
+      generated:
+        name: img2img_s0.3
+        ratio: 1.0
+  img2img_s0.5_r1.0:
+    aug:
+      generated:
+        name: img2img_s0.5
+        ratio: 1.0
+  img2img_s0.7_r1.0:
+    aug:
+      generated:
+        name: img2img_s0.7
+        ratio: 1.0
+  img2img_s0.85_r1.0:
+    aug:
+      generated:
+        name: img2img_s0.85
+        ratio: 1.0
+  img2img_s1.0_r1.0:
+    aug:
+      generated:
+        name: img2img_s1.0
+        ratio: 1.0
+  inpaint_center_m0.5_r1.0:
+    aug:
+      generated:
+        name: inpaint_center_m0.5
+        ratio: 1.0
+  inpaint_center_m0.75_r1.0:
+    aug:
+      generated:
+        name: inpaint_center_m0.75
+        ratio: 1.0
+  inpaint_border_k0.5_r1.0:
+    aug:
+      generated:
+        name: inpaint_border_k0.5
+        ratio: 1.0
+  inpaint_border_k0.75_r1.0:
+    aug:
+      generated:
+        name: inpaint_border_k0.75
+        ratio: 1.0
+  img2img_s1.0_sketch_r1.0:
+    aug:
+      generated:
+        name: img2img_s1.0_sketch
+        ratio: 1.0
+  img2img_s1.0_g1.0_r1.0:
+    aug:
+      generated:
+        name: img2img_s1.0_g1.0
+        ratio: 1.0
+  s1.0_noise0.25:
+    aug:
+      generated:
+        name: img2img_s1.0
+        ratio: 1.0
+        label_noise:
+          name: img2img_s1.0_wrong
+          rate: 0.25
+  s1.0_noise0.5:
+    aug:
+      generated:
+        name: img2img_s1.0
+        ratio: 1.0
+        label_noise:
+          name: img2img_s1.0_wrong
+          rate: 0.5
+  s0.7_noise0.5:
+    aug:
+      generated:
+        name: img2img_s0.7
+        ratio: 1.0
+        label_noise:
+          name: img2img_s0.7_wrong
+          rate: 0.5
+  img2img_s1.0_r0.25:
+    aug:
+      generated:
+        name: img2img_s1.0
+        ratio: 0.25
+  img2img_s1.0_r0.5:
+    aug:
+      generated:
+        name: img2img_s1.0
+        ratio: 0.5
+  sdxl_s0.5_r1.0:
+    aug:
+      generated:
+        name: sdxl_s0.5
+        ratio: 1.0
+  sdxl_s1.0_r1.0:
+    aug:
+      generated:
+        name: sdxl_s1.0
+        ratio: 1.0

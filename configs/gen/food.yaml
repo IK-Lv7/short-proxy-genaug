@@ -1,0 +1,46 @@
+# Generation for Food-101 (50/class). Upscale 256px source images to 512px (768px for SDXL), generate, then resize back to 256px
+# Prompts have the same form as Flowers102 ("a photo of a {cls}, a type of food"). Conditions match Flowers102 and c100pt_gen
+common:
+  source: {dataset: food101, n_per_class: 50, n_val_per_class: 50, subset_seed: 0}
+  out_root: data/generated
+  n_per_image: 1
+  seed: 0
+  resolution: 512
+  cache_dir: data/hf_cache
+  prompt: "a photo of a {cls}, a type of food"
+  negative_prompt: "blurry, low quality, text, watermark"
+  guidance_scale: 7.5
+  num_inference_steps: 30
+  batch_size: 8
+variants:
+  resize_roundtrip_fd: {method: resize_roundtrip}
+  img2img_s0.5_fd: {method: img2img, model: stable-diffusion-v1-5/stable-diffusion-v1-5, strength: 0.5}
+  img2img_s1.0_fd: {method: img2img, model: stable-diffusion-v1-5/stable-diffusion-v1-5, strength: 1.0}
+  img2img_s1.0_wrong_fd: {method: img2img, model: stable-diffusion-v1-5/stable-diffusion-v1-5, strength: 1.0, wrong_prompt: true}
+  img2img_s1.0_g1.0_fd: {method: img2img, model: stable-diffusion-v1-5/stable-diffusion-v1-5, strength: 1.0, guidance_scale: 1.0}
+  img2img_s1.0_sketch_fd:
+    method: img2img
+    model: stable-diffusion-v1-5/stable-diffusion-v1-5
+    strength: 1.0
+    prompt: "a black and white pencil sketch of a {cls}, a type of food"
+  inpaint_center_m0.75_fd:
+    method: inpaint
+    model: stable-diffusion-v1-5/stable-diffusion-inpainting
+    variant: fp16
+    strength: 1.0
+    mask_mode: center
+    mask_frac: 0.75
+  inpaint_border_k0.75_fd:
+    method: inpaint
+    model: stable-diffusion-v1-5/stable-diffusion-inpainting
+    variant: fp16
+    strength: 1.0
+    mask_mode: border
+    mask_frac: 0.75
+  sdxl_s1.0_fd:
+    method: sdxl_img2img
+    model: stabilityai/stable-diffusion-xl-base-1.0
+    variant: fp16
+    resolution: 768
+    batch_size: 4
+    strength: 1.0

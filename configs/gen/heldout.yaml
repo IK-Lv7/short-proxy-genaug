@@ -1,0 +1,38 @@
+# New conditions for validating the direction rule (does the predictor go up or down)
+# The rule was fixed on the existing 20 conditions and pre-registered before seeing these training results
+common:
+  source: {n_per_class: 50, n_val_per_class: 50, subset_seed: 0}
+  out_root: data/generated
+  n_per_image: 1
+  seed: 0
+  resolution: 512
+  cache_dir: data/hf_cache
+  negative_prompt: "blurry, low quality, text, watermark"
+  num_inference_steps: 30
+  batch_size: 8
+variants:
+  # Weaken guidance to naturally lower class fidelity (no artificial label noise)
+  img2img_s1.0_g1.0:
+    method: img2img
+    model: stable-diffusion-v1-5/stable-diffusion-v1-5
+    prompt: "a photo of a {cls}"
+    strength: 1.0
+    guidance_scale: 1.0
+  # Shift the visual domain substantially
+  img2img_s1.0_sketch:
+    method: img2img
+    model: stable-diffusion-v1-5/stable-diffusion-v1-5
+    prompt: "a black and white pencil sketch of a {cls}"
+    strength: 1.0
+    guidance_scale: 7.5
+  # Label noise via a different method (inpainting)
+  inpaint_center_m0.75_wrong:
+    method: inpaint
+    model: stable-diffusion-v1-5/stable-diffusion-inpainting
+    variant: fp16
+    prompt: "a photo of a {cls}"
+    guidance_scale: 7.5
+    strength: 1.0
+    mask_mode: center
+    mask_frac: 0.75
+    wrong_prompt: true

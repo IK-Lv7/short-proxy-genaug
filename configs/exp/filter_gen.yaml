@@ -1,0 +1,47 @@
+# Removal/replacement of generated images: drop the 25% with highest per-image proxy (proxysample1000) loss, or replace them with images generated from another seed
+# As a control, remove/replace the same number of randomly chosen images. Total 16000 iterations; Δ is relative to fixedsteps_gen/baseline
+# Scores: scripts/make_filter_scores.py; replacement images: configs/gen/filter.yaml
+name: filter_gen
+reference: fixedsteps_gen/baseline
+seeds: [0, 1, 2, 3, 4]
+overrides:
+  train: {steps: 16000}
+conditions:
+  # 50% label noise (labelnoise_gen/s1.0_noise0.5, Δ -5.49)
+  noise0.5_drop_loss:
+    aug: {generated: {name: img2img_s1.0, ratio: 1.0, label_noise: {name: img2img_s1.0_wrong, rate: 0.5},
+                      filter: {frac: 0.25, by: loss, score: results/filter_scores/proxysample1000__labelnoise_gen__s1.0_noise0.5.npy}}}
+  noise0.5_drop_random:
+    aug: {generated: {name: img2img_s1.0, ratio: 1.0, label_noise: {name: img2img_s1.0_wrong, rate: 0.5},
+                      filter: {frac: 0.25, by: random}}}
+  noise0.5_replace_loss:
+    aug: {generated: {name: img2img_s1.0, ratio: 1.0, label_noise: {name: img2img_s1.0_wrong, rate: 0.5},
+                      filter: {frac: 0.25, by: loss, replace: img2img_s1.0_seed1,
+                               score: results/filter_scores/proxysample1000__labelnoise_gen__s1.0_noise0.5.npy}}}
+  noise0.5_replace_random:
+    aug: {generated: {name: img2img_s1.0, ratio: 1.0, label_noise: {name: img2img_s1.0_wrong, rate: 0.5},
+                      filter: {frac: 0.25, by: random, replace: img2img_s1.0_seed1}}}
+  # No label noise, one of the most beneficial conditions (fixedsteps_gen/img2img_s1.0_r1.0, Δ +8.85)
+  s1.0_drop_loss:
+    aug: {generated: {name: img2img_s1.0, ratio: 1.0,
+                      filter: {frac: 0.25, by: loss, score: results/filter_scores/proxysample1000__fixedsteps_gen__img2img_s1.0_r1.0.npy}}}
+  s1.0_drop_random:
+    aug: {generated: {name: img2img_s1.0, ratio: 1.0, filter: {frac: 0.25, by: random}}}
+  s1.0_replace_loss:
+    aug: {generated: {name: img2img_s1.0, ratio: 1.0,
+                      filter: {frac: 0.25, by: loss, replace: img2img_s1.0_seed1,
+                               score: results/filter_scores/proxysample1000__fixedsteps_gen__img2img_s1.0_r1.0.npy}}}
+  s1.0_replace_random:
+    aug: {generated: {name: img2img_s1.0, ratio: 1.0, filter: {frac: 0.25, by: random, replace: img2img_s1.0_seed1}}}
+  # guidance 1.0 (heldout_gen/img2img_s1.0_g1.0_r1.0, Δ +0.85; G got the direction wrong)
+  g1.0_drop_loss:
+    aug: {generated: {name: img2img_s1.0_g1.0, ratio: 1.0,
+                      filter: {frac: 0.25, by: loss, score: results/filter_scores/proxysample1000__heldout_gen__img2img_s1.0_g1.0_r1.0.npy}}}
+  g1.0_drop_random:
+    aug: {generated: {name: img2img_s1.0_g1.0, ratio: 1.0, filter: {frac: 0.25, by: random}}}
+  g1.0_replace_loss:
+    aug: {generated: {name: img2img_s1.0_g1.0, ratio: 1.0,
+                      filter: {frac: 0.25, by: loss, replace: img2img_s1.0_g1.0_seed1,
+                               score: results/filter_scores/proxysample1000__heldout_gen__img2img_s1.0_g1.0_r1.0.npy}}}
+  g1.0_replace_random:
+    aug: {generated: {name: img2img_s1.0_g1.0, ratio: 1.0, filter: {frac: 0.25, by: random, replace: img2img_s1.0_g1.0_seed1}}}

@@ -1,0 +1,15 @@
+# Label-noise intervention: lower label consistency independently of strength
+# Replace a fraction rate of generated images with images generated using another class's prompt (labels unchanged)
+# rate=0 conditions equal img2img_s0.7_r1.0 / img2img_s1.0_r1.0 in fixedsteps_gen
+name: labelnoise_gen
+reference: fixedsteps_gen/baseline
+seeds: [0, 1, 2, 3, 4]
+overrides:
+  train: {steps: 16000}
+conditions:
+  s0.7_noise0.25: {aug: {generated: {name: img2img_s0.7, ratio: 1.0, label_noise: {name: img2img_s0.7_wrong, rate: 0.25}}}}
+  s0.7_noise0.5:  {aug: {generated: {name: img2img_s0.7, ratio: 1.0, label_noise: {name: img2img_s0.7_wrong, rate: 0.5}}}}
+  s0.7_noise1.0:  {aug: {generated: {name: img2img_s0.7, ratio: 1.0, label_noise: {name: img2img_s0.7_wrong, rate: 1.0}}}}
+  s1.0_noise0.25: {aug: {generated: {name: img2img_s1.0, ratio: 1.0, label_noise: {name: img2img_s1.0_wrong, rate: 0.25}}}}
+  s1.0_noise0.5:  {aug: {generated: {name: img2img_s1.0, ratio: 1.0, label_noise: {name: img2img_s1.0_wrong, rate: 0.5}}}}
+  s1.0_noise1.0:  {aug: {generated: {name: img2img_s1.0, ratio: 1.0, label_noise: {name: img2img_s1.0_wrong, rate: 1.0}}}}

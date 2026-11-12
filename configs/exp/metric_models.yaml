@@ -1,0 +1,17 @@
+# Models used for computing metrics
+#   oracle: judges label consistency and diversity. Trained on 45000 CIFAR-100 train images (50/class held out for validation)
+#   affinity_ref: baseline trained on only 5000 real images (same setup as fixedsteps_gen/baseline)
+#     -> memorized the source images and Affinity exceeded 1, so replaced by affinity_ref_val
+#   affinity_ref_val: trained on 5000 validation images; has not seen the training subset (source images)
+name: metric_models
+reference: affinity_ref
+seeds: [0]
+conditions:
+  oracle:
+    data: {n_per_class: 450}
+    train: {epochs: 200, save_model: data/models/oracle_seed0.pt}
+  affinity_ref:
+    train: {steps: 16000, save_model: data/models/affinity_ref_seed0.pt}
+  affinity_ref_val:
+    data: {train_split: val}
+    train: {steps: 16000, save_model: data/models/affinity_ref_val_seed0.pt}

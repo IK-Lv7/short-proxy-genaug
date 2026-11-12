@@ -1,0 +1,12 @@
+# Sixth check: new generation conditions where diversity drops naturally (configs/gen/review6.yaml). CIFAR-100 subset 0, ResNet-18, total 16000 iterations
+# Δ is relative to fixedsteps_gen/baseline
+name: review6_gen
+reference: fixedsteps_gen/baseline
+seeds: [0, 1, 2, 3, 4]
+overrides:
+  train: {steps: 16000}
+conditions:
+  img2img_s1.0_cseed_r1.0:          {aug: {generated: {name: img2img_s1.0_cseed, ratio: 1.0}}}
+  img2img_s0.85_cseed_r1.0:         {aug: {generated: {name: img2img_s0.85_cseed, ratio: 1.0}}}
+  img2img_s1.0_g15_r1.0:            {aug: {generated: {name: img2img_s1.0_g15, ratio: 1.0}}}
+  inpaint_center_m0.75_cseed_r1.0:  {aug: {generated: {name: inpaint_center_m0.75_cseed, ratio: 1.0}}}

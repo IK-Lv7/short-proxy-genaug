@@ -1,0 +1,22 @@
+# Scale-up (DMLR version): Food-101 (50/class, 101 classes) + fine-tune ImageNet-pretrained vitb16_pretrained (224px).
+# Conditions match Flowers102 and pretrained CIFAR-100. Total iterations are decided from food_vit_phase1 results (recorded in advance)
+name: food_vit_gen
+reference: baseline
+seeds: [0, 1, 2, 3, 4]
+overrides:
+  data: {name: food101, root: data/food101, n_per_class: 50, n_val_per_class: 50}
+  model: {name: vitb16_pretrained}
+  train: {steps: 4000, record_every: 200, batch_size: 32, lr: 0.01, weight_decay: 1.0e-4}
+conditions:
+  baseline: {}
+  roundtrip_r1.0: {aug: {generated: {name: resize_roundtrip_fd, ratio: 1.0}}}
+  img2img_s0.5_r1.0: {aug: {generated: {name: img2img_s0.5_fd, ratio: 1.0}}}
+  img2img_s1.0_r1.0: {aug: {generated: {name: img2img_s1.0_fd, ratio: 1.0}}}
+  img2img_s1.0_r0.5: {aug: {generated: {name: img2img_s1.0_fd, ratio: 0.5}}}
+  s1.0_noise0.25: {aug: {generated: {name: img2img_s1.0_fd, ratio: 1.0, label_noise: {name: img2img_s1.0_wrong_fd, rate: 0.25}}}}
+  s1.0_noise0.5: {aug: {generated: {name: img2img_s1.0_fd, ratio: 1.0, label_noise: {name: img2img_s1.0_wrong_fd, rate: 0.5}}}}
+  img2img_s1.0_g1.0_r1.0: {aug: {generated: {name: img2img_s1.0_g1.0_fd, ratio: 1.0}}}
+  img2img_s1.0_sketch_r1.0: {aug: {generated: {name: img2img_s1.0_sketch_fd, ratio: 1.0}}}
+  inpaint_center_m0.75_r1.0: {aug: {generated: {name: inpaint_center_m0.75_fd, ratio: 1.0}}}
+  inpaint_border_k0.75_r1.0: {aug: {generated: {name: inpaint_border_k0.75_fd, ratio: 1.0}}}
+  sdxl_s1.0_r1.0: {aug: {generated: {name: sdxl_s1.0_fd, ratio: 1.0}}}

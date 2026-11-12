@@ -1,0 +1,25 @@
+# Combine generative and conventional augmentation: add generated images on top of TrivialAugment (total 16000 iterations)
+# Δ is relative to the TrivialAugment-only condition (conventional_aug/trivialaugment). TrivialAugment is also applied to generated images
+name: combo_gen
+reference: conventional_aug/trivialaugment
+seeds: [0, 1, 2, 3, 4]
+overrides:
+  train: {steps: 16000}
+  aug: {trivialaugment: true}
+conditions:
+  roundtrip_r1.0:
+    aug: {generated: {name: resize_roundtrip, ratio: 1.0}}
+  img2img_s0.5_r1.0:
+    aug: {generated: {name: img2img_s0.5, ratio: 1.0}}
+  img2img_s1.0_r1.0:
+    aug: {generated: {name: img2img_s1.0, ratio: 1.0}}
+  inpaint_center_m0.75_r1.0:
+    aug: {generated: {name: inpaint_center_m0.75, ratio: 1.0}}
+  inpaint_border_k0.75_r1.0:
+    aug: {generated: {name: inpaint_border_k0.75, ratio: 1.0}}
+  img2img_s1.0_sketch_r1.0:
+    aug: {generated: {name: img2img_s1.0_sketch, ratio: 1.0}}
+  img2img_s1.0_g1.0_r1.0:
+    aug: {generated: {name: img2img_s1.0_g1.0, ratio: 1.0}}
+  s1.0_noise0.5:
+    aug: {generated: {name: img2img_s1.0, ratio: 1.0, label_noise: {name: img2img_s1.0_wrong, rate: 0.5}}}

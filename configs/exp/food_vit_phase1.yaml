@@ -1,0 +1,13 @@
+# Food-101 (50/class) + fine-tune ImageNet-pretrained vitb16_pretrained (224px).
+# First risk check: baseline seed variance and deciding total iterations (2k, 4k, 8k; 3 seeds)
+name: food_vit_phase1
+reference: baseline_s4000
+seeds: [0, 1, 2]
+overrides:
+  data: {name: food101, root: data/food101, n_per_class: 50, n_val_per_class: 50}
+  model: {name: vitb16_pretrained}
+  train: {record_every: 200, batch_size: 32, lr: 0.01, weight_decay: 1.0e-4}
+conditions:
+  baseline_s2000: {train: {steps: 2000}}
+  baseline_s4000: {train: {steps: 4000}}
+  baseline_s8000: {train: {steps: 8000}}

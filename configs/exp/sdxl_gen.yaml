@@ -1,0 +1,11 @@
+# Validation with the second generation model (SDXL base 1.0, 768px). CIFAR-100 subset 0, ResNet-18. Baseline is the one from fixedsteps_gen
+name: sdxl_gen
+reference: fixedsteps_gen/baseline
+seeds: [0, 1, 2, 3, 4]
+overrides:
+  train: {steps: 16000}
+conditions:
+  sdxl_s0.5_r1.0:      {aug: {generated: {name: sdxl_s0.5, ratio: 1.0}}}
+  sdxl_s1.0_r1.0:      {aug: {generated: {name: sdxl_s1.0, ratio: 1.0}}}
+  sdxl_s1.0_noise0.5:  {aug: {generated: {name: sdxl_s1.0, ratio: 1.0, label_noise: {name: sdxl_s1.0_wrong, rate: 0.5}}}}
+  sdxl_s1.0_g1.0_r1.0: {aug: {generated: {name: sdxl_s1.0_g1.0, ratio: 1.0}}}

@@ -1,0 +1,25 @@
+setting,n,s_encoding,rho_s,partial
+"CIFAR-100, ResNet-18, SD1.5",16,default,0.559457,0.950076
+"CIFAR-100, ResNet-18, SD1.5",16,inpaint = repainted area,0.580932,0.937902
+"CIFAR-100, ResNet-18, SD1.5",16,inpaint = 0.5,0.556542,0.932398
+"CIFAR-100, ResNet-18, SD1.5",16,"sketch, guidance 1.0 = 0.5",0.506791,0.932183
+"CIFAR-100, VGG-11",8,default,0.264979,0.923122
+"CIFAR-100, VGG-11",8,inpaint = repainted area,0.443928,0.916667
+"CIFAR-100, VGG-11",8,inpaint = 0.5,0.352107,0.926667
+"CIFAR-100, VGG-11",8,"sketch, guidance 1.0 = 0.5",0.260820,0.942421
+"Tiny-ImageNet, ResNet-18",9,default,0.705952,0.895874
+"Tiny-ImageNet, ResNet-18",9,inpaint = repainted area,0.495017,0.831962
+"Tiny-ImageNet, ResNet-18",9,inpaint = 0.5,0.442232,0.831853
+"Tiny-ImageNet, ResNet-18",9,"sketch, guidance 1.0 = 0.5",0.663330,0.695705
+"CIFAR-100, ResNet-50 (pretrained)",16,default,0.431325,0.962141
+"CIFAR-100, ResNet-50 (pretrained)",16,inpaint = repainted area,0.471473,0.968136
+"CIFAR-100, ResNet-50 (pretrained)",16,inpaint = 0.5,0.489093,0.963720
+"CIFAR-100, ResNet-50 (pretrained)",16,"sketch, guidance 1.0 = 0.5",0.641581,0.961788
+"CIFAR-100, ViT-B/16 (pretrained)",9,default,0.296683,0.935191
+"CIFAR-100, ViT-B/16 (pretrained)",9,inpaint = repainted area,0.419921,0.932361
+"CIFAR-100, ViT-B/16 (pretrained)",9,inpaint = 0.5,0.335410,0.938868
+"CIFAR-100, ViT-B/16 (pretrained)",9,"sketch, guidance 1.0 = 0.5",0.559017,0.913988
+"Flowers102, ResNet-50 (pretrained)",7,default,-0.668153,0.945157
+"Flowers102, ResNet-50 (pretrained)",7,inpaint = repainted area,-0.669894,0.830377
+"Flowers102, ResNet-50 (pretrained)",7,inpaint = 0.5,-0.657376,0.847913
+"Flowers102, ResNet-50 (pretrained)",7,"sketch, guidance 1.0 = 0.5",-0.115728,0.993420

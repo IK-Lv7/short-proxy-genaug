@@ -1,0 +1,10 @@
+# Phase 1: variance across seeds, compared with the size of Δaccuracy from conventional augmentation
+name: phase1_seed_variance
+reference: baseline            # condition used as the Δaccuracy reference
+seeds: [0, 1, 2, 3, 4]
+conditions:
+  baseline: {}
+  noaug:
+    aug: {crop_flip: false}
+  randaug:
+    aug: {randaugment: {num_ops: 2, magnitude: 9}}

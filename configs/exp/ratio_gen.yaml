@@ -1,0 +1,11 @@
+# Mix ratio: vary only the number of images added from the same image pool (ratio 1.0 is in fixedsteps_gen)
+name: ratio_gen
+reference: fixedsteps_gen/baseline
+seeds: [0, 1, 2, 3, 4]
+overrides:
+  train: {steps: 16000}
+conditions:
+  img2img_s0.7_r0.25: {aug: {generated: {name: img2img_s0.7, ratio: 0.25}}}
+  img2img_s0.7_r0.5:  {aug: {generated: {name: img2img_s0.7, ratio: 0.5}}}
+  img2img_s1.0_r0.25: {aug: {generated: {name: img2img_s1.0, ratio: 0.25}}}
+  img2img_s1.0_r0.5:  {aug: {generated: {name: img2img_s1.0, ratio: 0.5}}}

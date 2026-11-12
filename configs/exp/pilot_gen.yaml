@@ -1,0 +1,14 @@
+# Generative-augmentation pilot: add 5000 generated images (ratio 1.0) to 5000 real images
+# Baseline is phase1's baseline (same settings, same seeds)
+name: pilot_gen
+reference: phase1_seed_variance/baseline
+seeds: [0, 1, 2, 3, 4]
+conditions:
+  roundtrip_r1.0:
+    aug: {generated: {name: resize_roundtrip, ratio: 1.0}}
+  img2img_s0.3_r1.0:
+    aug: {generated: {name: img2img_s0.3, ratio: 1.0}}
+  img2img_s0.5_r1.0:
+    aug: {generated: {name: img2img_s0.5, ratio: 1.0}}
+  img2img_s0.7_r1.0:
+    aug: {generated: {name: img2img_s0.7, ratio: 1.0}}

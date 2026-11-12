@@ -1,0 +1,14 @@
+setting,conditions,n,n_families,rho,rho_min,dropped_at_min,rho_max
+"CIFAR-100, ResNet-18, SD1.5",all,23,7,0.928854,0.837363,img2img strength,0.948052
+"CIFAR-100, ResNet-18, SD1.5",no label noise,16,6,0.926471,0.821429,img2img strength,0.938462
+CIFAR-100 (2nd subset),all,6,5,0.828571,0.700000,label noise,1.000000
+"CIFAR-100, VGG-11",all,10,7,0.927273,0.900000,guidance 1.0,0.950000
+"CIFAR-100, VGG-11",no label noise,8,6,0.928571,0.892857,guidance 1.0,1.000000
+"Tiny-ImageNet, ResNet-18",all,12,6,0.844134,0.702935,label noise,0.881818
+"Tiny-ImageNet, ResNet-18",no label noise,9,5,0.702935,0.600000,img2img strength,0.754505
+"CIFAR-100, ResNet-50 (pretrained)",all,19,8,0.975439,0.961765,label noise,0.985552
+"CIFAR-100, ResNet-50 (pretrained)",no label noise,16,7,0.961765,0.933333,img2img strength,0.978571
+"CIFAR-100, ViT-B/16 (pretrained)",all,11,8,0.963636,0.933333,label noise,0.987879
+"CIFAR-100, ViT-B/16 (pretrained)",no label noise,9,7,0.933333,0.904762,guidance 1.0,0.976190
+"Flowers102, ResNet-50 (pretrained)",all,9,6,0.883333,0.785714,label noise,0.942857
+"Flowers102, ResNet-50 (pretrained)",no label noise,7,5,0.785714,0.657143,guidance 1.0,1.000000
